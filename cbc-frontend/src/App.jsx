@@ -1,15 +1,31 @@
-import { useState } from 'react'
-import './App.css'
-import ProductCard from './components/productCard'
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import AdminPage from './pages/adminPage.jsx';
+import HomePage from './pages/homePage.jsx';
+import TestPage from './pages/test.jsx';
+import LoginPage from './pages/loginPage.jsx';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <ProductCard name="i pad" price="$499" image="https://onei.lk/wp-content/uploads/2023/04/iPad-Air-5th-Space-Grey-700x700.jpg"/>
-    </>
+    <BrowserRouter>
+       <div className="w-full h-[100vh]"> 
+
+       <Toaster position="top-center"/>
+
+        <Routes path="/">
+          <Route path="/*" element={<HomePage/>}/>
+          <Route path="/login" element={<LoginPage/>}/>
+          <Route path="/register" element={<h1>Register Page</h1>}/>
+          <Route path="/admin/*" element={<AdminPage/>}/>
+          <Route path="/test" element={<TestPage/>}/>
+        </Routes>
+
+       </div>
+    </BrowserRouter>
   )
 }
 
-export default App
+export default App;
+
+

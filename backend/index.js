@@ -3,8 +3,15 @@ import mongoose from "mongoose";
 import userRouter from "./routes/userRouter.js";
 import jwt from  "jsonwebtoken";
 import productRouter from "./routes/productRouter.js";
+import cors from "cors";
+import dotenv from "dotenv";
 
 const app = express() // assign express into const vairable name app.
+
+//middleware for accept request from anywhere...
+app.use(cors());
+
+dotenv.config(); //use to connect data from .env file...
 
 /*function success(){
     console.log("Server is Started")
@@ -24,7 +31,7 @@ app.use(
         token = token.replace("Bearer ","") //use for remove "Bearer " from this token.
 
         //decrypt token.
-        jwt.verify(token, "jwt-secret",
+        jwt.verify(token, process.env.JWT_SECRET,
             (err, decoded)=>{
                 if(decoded == null){
                     res.json({
@@ -42,7 +49,7 @@ app.use(
 
 
 //connect database.
-const connectionString = "mongodb+srv://admin:1234@cluster0.51kmbrg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+const connectionString = process.env.MONGO_URI;
 
 mongoose.connect(connectionString).then(
     ()=>{
@@ -54,8 +61,8 @@ mongoose.connect(connectionString).then(
     }
 ) //use for connect database.
 
-app.use("/user", userRouter);
-app.use("/products", productRouter);
+app.use("/api/user", userRouter);
+app.use("/api/products", productRouter);
 
 
 //start express server

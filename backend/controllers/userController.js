@@ -2,6 +2,7 @@ import User from "../models/user.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+//sign in process...
 export function createUser(req,res){
 
     const hashedPassword = bcrypt.hashSync(req.body.password, 10) // 10 is salting roundes. it means the same password hashing 10 times.
@@ -30,6 +31,7 @@ export function createUser(req,res){
     )
 }
 
+//login process...
 export function loginUser(req,res){
     User.findOne(
         {
@@ -38,7 +40,7 @@ export function loginUser(req,res){
     ).then(
         (user)=>{
             if(user == null){
-                res.json(
+                res.status(404).json(
                     {
                         message: "User not found"
                     }
@@ -55,18 +57,25 @@ export function loginUser(req,res){
                             role : user.role,
                             isEmailVerified : user.isEmailVrified
                         },
-                        "jwt-secret"
+                        process.env.JWT_SECRET
                     )
 
 
                     res.json(
                         {
                             message : "Login successful",
-                            token : token
+                            token : token,
+                            user : {
+                                email : user.email,
+                                firstName : user.firstName,
+                                lastName : user.lastName,
+                                role : user.role,
+                                isEmailVerified : user.isEmailVrified
+                            }
                         }
                     )
                 } else {
-                    res.json(
+                    res.status(401).json(
                         {
                             message : "Invalid password"
                         }
