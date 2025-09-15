@@ -2,11 +2,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { TiEdit } from "react-icons/ti";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoMdAddCircleOutline } from "react-icons/io";
 
 export default function AdminProductPage() {
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate()
 
   // get request to fetch all products...
   useEffect(() => {
@@ -34,6 +35,7 @@ export default function AdminProductPage() {
               <th className="p-3 text-left">Price</th>
               <th className="p-3 text-left">Labelled Price</th>
               <th className="p-3 text-left">Category</th>
+              <th className="p-3 text-left">Stock</th>
               <th className="p-3 text-center">Actions</th>
             </tr>
           </thead>
@@ -63,14 +65,11 @@ export default function AdminProductPage() {
                   Rs. {item.labelledPrice}
                 </td>
                 <td className="p-3">{item.category}</td>
+                <td className="p-3">{item.stock}</td>
                 <td className="p-3">
                   <div className="flex flex-row gap-4 justify-center items-center">
-                    <button className="text-red-500 hover:text-red-700 transition">
-                      <FaRegTrashCan size={18} />
-                    </button>
-                    <button className="text-accent hover:text-purple-800 transition">
-                      <TiEdit size={20} />
-                    </button>
+                      <FaRegTrashCan size={18} className="cursor-pointer text-red-500 hover:text-red-700 transition"/>
+                      <TiEdit size={20} className="cursor-pointer text-accent hover:text-purple-800 transition" onClick={()=>{navigate("/admin/update-product" ,{state : item})}}/>
                   </div>
                 </td>
               </tr>
