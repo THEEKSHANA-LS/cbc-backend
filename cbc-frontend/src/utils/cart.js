@@ -1,5 +1,5 @@
 //read the cart... 
-export default function loardCart(){
+export function loadCart(){
 
     let cartString = localStorage.getItem("cart"); //"[item1, item2, ....]"
 
@@ -14,13 +14,13 @@ export default function loardCart(){
 }
 
 //add the product into the cart...
-export default function addToCart(product, quantity){
-    let cart = loardCart(); //firstly load cart...
+export function addToCart(product, quantity){
+    let cart = loadCart(); //firstly load cart...
 
     //check if the sellected item already in the cart...
     const existingItemIndex = cart.findIndex(
         (item)=>{
-            return item.productId == product.productId
+           return item.productId == product.productId
         }
     )
 
@@ -28,7 +28,7 @@ export default function addToCart(product, quantity){
         //item is not in cart...
         if(quantity < 1){
             console.log("Quantity must be at least 1")
-            return
+            return;
         }
 
         const cartItem = {
@@ -37,16 +37,16 @@ export default function addToCart(product, quantity){
             price : product.price,
             labelledPrice : product.labelledPrice,
             quantity : quantity,
-            image : product.image[0]
+            image : product.images[1]
         }
 
         cart.push(cartItem) //add item to the array...
 
     } else {
         //item already in cart...
-        const existingItemIndex = cart[existingItemIndex];
+        const existingItem = cart[existingItemIndex];
 
-        const newQuantity = existingItemIndex.quantity + quantity;
+        const newQuantity = existingItem.quantity + quantity;
         
         //remove current item from cart if quantity is less than 1...
         if(newQuantity < 1){
@@ -64,4 +64,18 @@ export default function addToCart(product, quantity){
     localStorage.setItem("cart", JSON.stringify(cart));
 
 }
+
+//create function for calculate total price in cartPage...
+export function getTotal(){
+    const cart = loadCart();
+    let total = 0;
+
+    cart.forEach(
+        (item)=>{
+            total += item.price * item.quantity;
+        }
+    )
+    return total;
+}
+
 

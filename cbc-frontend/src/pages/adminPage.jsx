@@ -6,6 +6,7 @@ import { HiOutlineUsers } from "react-icons/hi2";
 import AdminProductPage from "./admin/adminProductPage.jsx";
 import AddProductPage from "./admin/adminAddNewProduct.jsx";
 import UpdateProductPage from "./admin/adminUpdateProduct.jsx";
+import AdminOrderPage from "./admin/adminOrdersPage.jsx";
 
 export default function AdminPage() {
   return (
@@ -62,10 +63,10 @@ export default function AdminPage() {
 
       {/* Main Content */}
       <div className="w-[calc(100%-300px)] h-full shadow-lg rounded-lg overflow-hidden bg-secondary">
-        <div className="bg-secondary w-full max-w-full h-full max-h-full overflow-y-scroll">
+        <div className="bg-primary w-full max-w-full h-full max-h-full overflow-y-scroll">
           <Routes path="/">
             <Route path="/" element={<h1 className="p-6 text-xl font-bold">Dashboard</h1>} />
-            <Route path="/orders" element={<h1 className="p-6 text-xl font-bold">Orders</h1>} />
+            <Route path="/orders" element={<AdminOrderPage/>} />
             <Route path="/products" element={<AdminProductPage />} />
             <Route path="/users" element={<h1 className="p-6 text-xl font-bold">Users</h1>} />
             <Route path="/add-product" element={<AddProductPage />} />
