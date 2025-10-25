@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { MdMenu, MdOutlineShoppingCart } from "react-icons/md";
 import { useState } from "react";
+import UserData from "./userData";
 
 export default function Header(){
-    
+
     const [isSliderbarOpen, setSliderbarOpen] = useState(false);
      
     return(
@@ -37,6 +38,10 @@ export default function Header(){
                             <a href="/about" className="p-4 border-b border-secondary/10">About</a>
                             <a href="/contact" className="p-4 border-b border-secondary/10">Contact</a>
                             <a href="/cart" className="p-4 border-b border-secondary/10">Cart</a>
+                            <div className="lg:hidden flex w-[300px] absolute bottom-[20px] ml-5 justify-start items-center gap-4">
+                               <UserData/>  
+                            </div>
+            
                          </div>
                        </div>
                     </div>
@@ -48,6 +53,10 @@ export default function Header(){
                     <Link to="/about">About</Link>
                     <Link to="/contact">Contact</Link>
                 </div>
+                <div className="h-full hidden lg:flex w-[200px] absolute right-[100px] top-0 justify-end items-center gap-4">
+                  <UserData/>  
+                </div>
+            
                 <Link to="/cart" className="h-full absolute right-0 hidden lg:flex justify-center items-center text-3xl">
                    <MdOutlineShoppingCart/>
                 </Link>

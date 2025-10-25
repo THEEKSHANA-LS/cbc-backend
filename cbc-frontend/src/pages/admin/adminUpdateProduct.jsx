@@ -152,11 +152,14 @@ export default function UpdateProductPage() {
             }}
           >
             <option value="">Select Category</option>
-            <option value="cream">Cream</option>
-            <option value="lotion">Lotion</option>
-            <option value="serum">Serum</option>
-            <option value="cleanser">Cleanser</option>
-            <option value="Makeup">Makeup</option>
+            <option value="j-shirts">T-Shirts</option>
+            <option value="shirts">Shirts</option>
+            <option value="jeans">Jeans</option>
+            <option value="trousers">Trousers</option>
+            <option value="shorts">Shorts</option>
+            <option value="belts">Belts</option>
+            <option value="caps">Caps</option>
+            <option value="others">Others</option>
           </select>
 
           <input

@@ -34,14 +34,14 @@ const userSchema = new mongoose.Schema(
             default : false
         },
 
-        isEmailVrified : {
+        isEmailVerified : {
             type : Boolean,
             default : false
         },
         
         image : {
             type : String,
-            default : "https://avatar.iran.liara.run/public/boy"
+            default : "/user.png"
         }
 
 
