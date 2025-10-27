@@ -5,11 +5,15 @@ import toast from "react-hot-toast";
 
 export default function RegisterPage() {
   const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");  
+  const [lastName, setLastName] = useState("");  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
+
+  // **********************************************
+  // NOTE: LOGIC REMAINS COMPLETELY UNCHANGED
+  // **********************************************
 
   async function Register() {
     // Frontend validation
@@ -50,86 +54,101 @@ export default function RegisterPage() {
   }
   
   return (
+    // REVISED: Using custom colors (bg-accent/text-primary) and ensuring full height
     <div className="w-full min-h-screen flex flex-col md:flex-row bg-[url('/bg.jpg')] object-cover bg-cover text-primary">
       
-      {/* Left Section - Branding */}
-      <div className="w-full md:w-1/2 flex justify-center items-center px-6 py-12 md:py-0">
-        <div className="w-full max-w-md bg-white/10 border border-white/20 backdrop-blur-xl shadow-2xl rounded-3xl p-8 md:p-10 flex flex-col items-center space-y-5">
+      {/* Right Section (Form) - MOVED TO RIGHT ON DESKTOP for consistency with Login */}
+      {/* REVISED: Swapped order with branding section for consistency. Added dark background for mobile */}
+      <div className="w-full md:w-1/2 order-2 flex justify-center items-center px-6 py-12 md:py-0 bg-accent/30 md:bg-transparent">
+        <div className="w-full max-w-sm bg-accent/80 border border-primary/10 backdrop-blur-lg shadow-2xl rounded-2xl p-8 sm:p-10 flex flex-col items-center space-y-6">
           
           {/* Logo */}
-          <img src="/logo.png" alt="Logo" className="w-24 h-24 " />
+          <img src="/logo.png" alt="Logo" className="w-20 h-20" />
 
-          {/* Title */}
-          <h2 className="text-3xl font-bold text-secondary text-center">
-            Create Your Account
-          </h2>
-          <p className="text-sm text-gray-300 mb-4 text-center">
-            Join us and continue your beauty journey
-          </p>
+          {/* Title & Subtitle */}
+          <div className="space-y-1">
+            <h2 className="text-3xl font-bold text-primary">Create Your Account</h2>
+            <p className="text-md text-primary/60 text-center">
+              Join us and continue your beauty journey
+            </p>
+          </div>
 
           {/* Input Fields */}
-          <div className="w-full space-y-4">
-            <input
-              onChange={(e) => setFirstName(e.target.value)}
-              type="text"
-              placeholder="First Name"
-              className="w-full h-[48px] rounded-lg px-4 bg-white/90 text-gray-800 focus:outline-none focus:ring-2 focus:ring-secondary shadow-sm transition-all"
-            />
-            <input
-              onChange={(e) => setLastName(e.target.value)}
-              type="text"
-              placeholder="Last Name"
-              className="w-full h-[48px] rounded-lg px-4 bg-white/90 text-gray-800 focus:outline-none focus:ring-2 focus:ring-secondary shadow-sm transition-all"
-            />
+          <div className="w-full space-y-4 pt-2">
+            
+            {/* IMPROVEMENT: Grouped First and Last Name in a two-column grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <input
+                onChange={(e) => setFirstName(e.target.value)}
+                type="text"
+                placeholder="First Name"
+                // Applied consistent dark input styling
+                className="h-12 rounded-lg px-5 text-base bg-accent/95 text-primary placeholder-primary/40 border border-primary/20 focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none shadow-lg transition-all"
+              />
+              <input
+                onChange={(e) => setLastName(e.target.value)}
+                type="text"
+                placeholder="Last Name"
+                // Applied consistent dark input styling
+                className="h-12 rounded-lg px-5 text-base bg-accent/95 text-primary placeholder-primary/40 border border-primary/20 focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none shadow-lg transition-all"
+              />
+            </div>
+
+            {/* Other Inputs */}
             <input
               onChange={(e) => setEmail(e.target.value)}
               type="email"
               placeholder="Email"
-              className="w-full h-[48px] rounded-lg px-4 bg-white/90 text-gray-800 focus:outline-none focus:ring-2 focus:ring-secondary shadow-sm transition-all"
+              // Applied consistent dark input styling
+              className="w-full h-12 rounded-lg px-5 text-base bg-accent/95 text-primary placeholder-primary/40 border border-primary/20 focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none shadow-lg transition-all"
             />
             <input
               onChange={(e) => setPassword(e.target.value)}
               type="password"
               placeholder="Password"
-              className="w-full h-[48px] rounded-lg px-4 bg-white/90 text-gray-800 focus:outline-none focus:ring-2 focus:ring-secondary shadow-sm transition-all"
+              // Applied consistent dark input styling
+              className="w-full h-12 rounded-lg px-5 text-base bg-accent/95 text-primary placeholder-primary/40 border border-primary/20 focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none shadow-lg transition-all"
             />
             <input
               onChange={(e) => setConfirmPassword(e.target.value)}
               type="password"
               placeholder="Confirm Password"
-              className="w-full h-[48px] rounded-lg px-4 bg-white/90 text-gray-800 focus:outline-none focus:ring-2 focus:ring-secondary shadow-sm transition-all"
+              // Applied consistent dark input styling
+              className="w-full h-12 rounded-lg px-5 text-base bg-accent/95 text-primary placeholder-primary/40 border border-primary/20 focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none shadow-lg transition-all"
             />
           </div>
 
           {/* Signup Button */}
+          {/* REVISED: Using secondary color and strong shadow for primary action, consistent with Login page */}
           <button
             onClick={Register}
-            className="w-full h-[48px] bg-secondary text-primary font-semibold rounded-lg shadow-md hover:scale-105 transition-all duration-300"
+            className="w-full h-12 bg-secondary text-accent font-bold text-lg rounded-lg shadow-lg shadow-secondary/50 hover:scale-[1.02] transition-all duration-300 active:scale-[0.98]"
           >
             Create Account
           </button>
 
           {/* Extra Links */}
-          <div className="flex justify-center items-center gap-2 text-sm text-gray-300 mt-3">
+          {/* REVISED: Better color contrast and spacing */}
+          <div className="flex justify-center items-center gap-2 text-sm text-primary/70 pt-2">
             <span>Already have an account?</span>
-            <Link to="/login" className="text-secondary hover:underline">
+            <Link to="/login" className="text-secondary font-semibold hover:underline transition-colors">
               Login
             </Link>
           </div>
         </div>
       </div>
       
-
-      {/* Right Section - Register Form */}
-      <div className="hidden md:flex w-1/2 flex-col justify-center pl-16 text-primary bg-gradient-to-br from-[#09090b]/90 to-[#1a1a1d]/90 backdrop-blur-sm">
-        <h1 className="text-5xl font-extrabold text-secondary drop-shadow-lg tracking-wide">
-          Crystal Beauty
+      {/* Left Section (Branding) - MOVED TO LEFT ON DESKTOP for consistency with Login */}
+      {/* REVISED: Used same deep gradient background and large text sizing */}
+      <div className="hidden md:flex w-1/2 order-1 flex-col justify-center px-16 bg-accent/90 backdrop-blur-sm">
+        <h1 className="text-6xl font-black text-secondary drop-shadow-lg tracking-tight">
+          Casual Club
         </h1>
-        <p className="mt-6 text-lg text-gray-200 max-w-lg leading-relaxed">
-          Discover your true beauty with our premium cosmetics.  
+        <p className="mt-8 text-xl text-primary/90 max-w-xl leading-relaxed">
+          Discover your true beauty with our premium cosmetics. 
           Enhance your natural glow with elegance and style.
         </p>
-        <p className="mt-6 text-md italic text-gray-400">
+        <p className="mt-8 text-lg italic text-primary/60">
           “Because beauty begins the moment you decide to be yourself.”
         </p>
       </div>
