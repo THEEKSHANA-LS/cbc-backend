@@ -10,19 +10,19 @@ export default function CartPage(){
     const [cart, setCart] = useState(loadCart());
 
     return(
-        <div className="w-full h-full lg:h-[calc(100vh-100px)] bg-primary flex flex-col pt-[40px] items-center">
-            <div className="w-[400px] lg:w-[600px] h-[400px] flex flex-col gap-4">
+        <div className="w-full min-h-screen text-secondary bg-gradient-to-b from-gray-900 to-black flex flex-col items-center py-10 px-3">
+            <div className="w-[400px] lg:w-[600px] flex flex-col gap-4">
                 {
                     cart.map((item, index)=>{
                         return(
-                            <div className="w-full h-[300px] lg:h-[120px] bg-white shadow-lg flex flex-col lg:flex-row relative items-center p-3 lg:p-0" key={index}>
+                            <div className="w-full h-[300px] rounded-xl lg:h-[120px] bg-white shadow-lg flex flex-col lg:flex-row relative items-center p-3 lg:p-0" key={index}>
                                 <button className="absolute text-red-500 right-[-50px] font-bold text-2xl rounded-full aspect-square hover:bg-red-500 hover:text-white p-[5px] cursor-pointer" onClick={
                                     ()=>{
                                         addToCart(item,-item.quantity);
                                         setCart(loadCart());
                                     }
                                 }><FaRegTrashCan/></button>
-                                <img className="h-[100px] lg:h-full aspect-square object-cover" src={item.image}/>
+                                <img className="h-[100px] lg:h-full rounded-xl aspect-square object-cover" src={item.image}/>
                                 <div className="w-full text-center lg:items-center justify-center lg:w-[200px] h-[100px] lg:h-full flex flex-col pl-[5px] pt-[10px]">
                                     <h1 className="font-semibold text-lg w-full text-wrap">{item.name}</h1>
                                     <span className="text-sm text-secondary">{item.productId}</span>
@@ -54,7 +54,7 @@ export default function CartPage(){
                         )
                     })
                 }
-                            <div className="w-[400px] lg:w-full h-[120px] bg-white shadow-lg flex flex-col-reverse lg:flex-row justify-end items-center relative">
+                            <div className="w-[400px] lg:w-full rounded-xl h-[120px] bg-white shadow-lg flex flex-col-reverse lg:flex-row justify-end items-center relative p-3 mb-5">
                                 <Link state={cart} to="/checkout" className="lg:absolute left-0 bg-accent text-white font-semibold text-lg w-[200px] h-[50px] flex justify-center items-center lg:ml-[20px] hover:bg-accent/80">Proceed To Checkout</Link>
                                <div className="h-[50px]">
                                  <span className=" text-accent font-semibold w-full text-center flex items-center lg:text-right text-2xl p-0 lg:pr-[10px] mt-[5px]">Total : LKR {getTotal().toFixed(2)}</span>

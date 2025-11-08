@@ -9,6 +9,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+  //google login function...
   const googleLogin = useGoogleLogin({
     onSuccess: (response) => {
       axios.post(import.meta.env.VITE_API_URL + "/api/user/google-login", {
@@ -28,6 +29,7 @@ export default function LoginPage() {
     }
   });
 
+  //normal login function...
   async function login() {
     try {
       const response = await axios.post(
@@ -60,11 +62,11 @@ export default function LoginPage() {
           Casual Club
         </h1>
         <p className="mt-8 text-xl text-primary/90 max-w-xl leading-relaxed">
-          Discover your true beauty with our premium cosmetics. 
-          Enhance your natural glow with elegance and style.
+        Step into a world of effortless style and confidence.
+        Elevate your everyday look with timeless fashion made for modern men.
         </p>
         <p className="mt-8 text-lg italic text-primary/60">
-          “Because beauty begins the moment you decide to be yourself.”
+        “Because real style starts with confidence.”
         </p>
       </div>
 
@@ -80,7 +82,7 @@ export default function LoginPage() {
           <div className="space-y-1">
             <h2 className="text-3xl font-bold text-primary">Welcome Back</h2>
             <p className="text-md text-primary/60 text-center">
-              Login to continue your beauty journey
+              Login to continue your stylish journey
             </p>
           </div>
 
@@ -105,7 +107,7 @@ export default function LoginPage() {
           {/* REVISED: Using secondary color as background for primary action */}
           <button
             onClick={login}
-            className="w-full h-12 bg-secondary text-accent font-bold text-lg rounded-lg shadow-lg shadow-secondary/50 hover:scale-[1.02] transition-all duration-300 active:scale-[0.98]"
+            className="w-full h-12 bg-secondary cursor-pointer text-accent font-bold text-lg rounded-lg shadow-lg shadow-secondary/50 hover:scale-[1.02] transition-all duration-300 active:scale-[0.98]"
           >
             Login
           </button>
@@ -114,7 +116,7 @@ export default function LoginPage() {
           {/* REVISED: More accessible design with a slight background on hover */}
           <button
             onClick={googleLogin}
-            className="w-full h-12 flex items-center justify-center space-x-3 border border-primary/20 text-primary font-semibold rounded-lg shadow-sm hover:bg-primary/5 transition-all duration-300"
+            className="w-full h-12 flex items-center justify-center cursor-pointer space-x-3 border border-primary/20 text-primary font-semibold rounded-lg shadow-sm hover:bg-primary/5 transition-all duration-300"
           >
             {/* Added Google Icon for better recognition (Assuming you have access to an SVG or icon library) */}
             <svg className="w-5 h-5" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M44.5 20H24v8.5h11.8C35.5 31.8 33 35.5 24 35.5c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.4 0 6.3 1.4 8.5 3.5l6-6C35.9 8.2 30.3 6 24 6c-10.5 0-19 8.5-19 19s8.5 19 19 19c10.3 0 17.5-7.4 17.5-17.5 0-1.2-.2-2.3-.4-3.4H24v-7.5h20.5z" fill="#0084d1"/></svg>

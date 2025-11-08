@@ -11,10 +11,6 @@ export default function RegisterPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
 
-  // **********************************************
-  // NOTE: LOGIC REMAINS COMPLETELY UNCHANGED
-  // **********************************************
-
   async function Register() {
     // Frontend validation
     if (!firstName || !lastName || !email || !password || !confirmPassword) {
@@ -69,7 +65,7 @@ export default function RegisterPage() {
           <div className="space-y-1">
             <h2 className="text-3xl font-bold text-primary">Create Your Account</h2>
             <p className="text-md text-primary/60 text-center">
-              Join us and continue your beauty journey
+              Join us and continue your stylish journey
             </p>
           </div>
 
@@ -122,7 +118,7 @@ export default function RegisterPage() {
           {/* REVISED: Using secondary color and strong shadow for primary action, consistent with Login page */}
           <button
             onClick={Register}
-            className="w-full h-12 bg-secondary text-accent font-bold text-lg rounded-lg shadow-lg shadow-secondary/50 hover:scale-[1.02] transition-all duration-300 active:scale-[0.98]"
+            className="w-full h-12 bg-secondary cursor-pointer text-accent font-bold text-lg rounded-lg shadow-lg shadow-secondary/50 hover:scale-[1.02] transition-all duration-300 active:scale-[0.98]"
           >
             Create Account
           </button>
@@ -145,11 +141,11 @@ export default function RegisterPage() {
           Casual Club
         </h1>
         <p className="mt-8 text-xl text-primary/90 max-w-xl leading-relaxed">
-          Discover your true beauty with our premium cosmetics. 
-          Enhance your natural glow with elegance and style.
+        Step into a world of effortless style and confidence.
+        Elevate your everyday look with timeless fashion made for modern men.
         </p>
         <p className="mt-8 text-lg italic text-primary/60">
-          “Because beauty begins the moment you decide to be yourself.”
+        “Because real style starts with confidence.”
         </p>
       </div>
     </div>

@@ -29,7 +29,7 @@ export default function ProductOverview(){
     }, [])
 
     return(
-        <div className="w-full lg:min-h-[calc(100vh-100px)] text-secondary bg-primary">
+        <div className="w-full lg:min-h-[calc(100vh-100px)] text-primary bg-gradient-to-b from-gray-900 to-black">
           {
             status == "loading" && <Loader/>
           }
@@ -62,9 +62,9 @@ export default function ProductOverview(){
                            product.labelledPrice > product.price ? 
                            <div className="flex gap-3 items-center">
                             <p className="text-lg text-secondary font-semibold line-through">LKR {product.labelledPrice.toFixed(2)}</p>
-                            <p className="text-lg text-accent font-semibold">LKR {product.price.toFixed(2)}</p>
+                            <p className="text-lg text-white font-semibold">LKR {product.price.toFixed(2)}</p>
                            </div> : 
-                           <p className="text-lg text-accent font-semibold">LKR {product.price.toFixed(2)}</p>
+                           <p className="text-lg text-white font-semibold">LKR {product.price.toFixed(2)}</p>
                         }
                         
                         {/*Add to cart and BuyNow buttons*/}
@@ -81,7 +81,7 @@ export default function ProductOverview(){
                               price : product.price,
                               labelledPrice : product.labelledPrice,
                               quantity : 1
-                           }]}className="w-[50%] h-full border border-accent text-accent font-semibold hover:bg-accent hover:text-white flex justify-center items-center">Buy Now</Link>
+                           }]}className="w-[50%] h-full border border-accent text-white font-semibold hover:bg-accent hover:text-white flex justify-center items-center">Buy Now</Link>
                         </div>
                     </div>
                 </div>

@@ -5,8 +5,8 @@ export default function ProductCard(props){
     const product = props.product;
 
     return(
-       <div className="w-[300px] h-[400px] shadow-2xl m-[6px] flex flex-col bg-primary p-[10px]">
-         <img className="w-full h-[250px] object-cover" src={product.images[0]}/>
+       <div className="w-[300px] h-[400px] shadow-2xl m-[6px] flex flex-col rounded-xl bg-primary p-[10px]">
+         <img className="w-full h-[250px] rounded-xl object-cover" src={product.images[0]}/>
          <h1 className="text-xl font-bold text-accent">{product.name}</h1>
          {
             product.labelledPrice > product.price ?

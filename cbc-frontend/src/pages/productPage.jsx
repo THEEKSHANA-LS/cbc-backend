@@ -25,7 +25,7 @@ export default function ProductPage(){
     }, [isLoading])
 
     return(
-        <div className="w-full min-h-[calc(100vh-100px)] bg-primary">
+        <div className="w-full min-h-[calc(100vh-100px)] bg-gradient-to-b from-gray-900 to-black">
             {
                 isLoading ? <Loader/> : 
                 <div className="w-full h-full flex flex-row flex-wrap justify-center">

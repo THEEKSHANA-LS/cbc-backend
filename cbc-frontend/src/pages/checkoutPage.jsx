@@ -59,12 +59,12 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="w-full min-h-[calc(100vh-100px)] overflow-y-scroll bg-primary flex flex-col pt-[40px] items-center">
+    <div className="w-full min-h-[calc(100vh-100px)] text-secondary bg-gradient-to-b from-gray-900 to-black flex flex-col pt-[40px] items-center">
       {/* responsive container */}
       <div className="w-[400px] lg:w-[600px] flex flex-col gap-4">
         {cart.map((item, index) => (
           <div
-            className="w-full bg-white shadow-lg flex flex-col lg:flex-row relative items-center p-3 lg:p-0"
+            className="w-full rounded-xl bg-white shadow-lg flex flex-col lg:flex-row relative items-center p-3 lg:p-0"
             key={index}
           >
             {/* delete button */}
@@ -80,7 +80,7 @@ export default function CheckoutPage() {
 
             {/* product image */}
             <img
-              className="h-[100px] lg:h-[120px] aspect-square object-cover"
+              className="h-[100px] lg:h-[120px] aspect-square object-cover rounded-xl"
               src={item.image}
             />
 
@@ -130,7 +130,7 @@ export default function CheckoutPage() {
         ))}
 
         {/* add text area for get user address and name */}
-        <div className="w-full  bg-white shadow-lg flex flex-col justify-between items-center p-3 relative">
+        <div className="w-full  bg-white shadow-lg flex flex-col justify-between rounded-xl items-center p-3 relative">
         <div className="w-full h-full flex flex-row justify-between items-center p-4">
             <label 
                htmlFor="name" 
@@ -160,7 +160,7 @@ export default function CheckoutPage() {
         </div>
 
         {/* total & checkout */}
-        <div className="w-full h-[120px] bg-white shadow-lg flex flex-col-reverse lg:flex-row justify-between items-center p-3">
+        <div className="w-full h-[120px] bg-white shadow-lg flex flex-col-reverse lg:flex-row rounded-xl justify-between items-center p-3 mb-5">
           <button
             onClick={purchaseCart}
             className="bg-accent text-white font-semibold text-lg w-[200px] h-[50px] flex justify-center items-center mt-3 lg:mt-0 hover:bg-accent/80"
