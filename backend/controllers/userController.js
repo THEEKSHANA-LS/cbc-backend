@@ -55,7 +55,7 @@ export const sendContactMessage = async (req, res) => {
 };
   
 
-//sign in process...
+//sign up process...
 export function createUser(req,res){
 
     const hashedPassword = bcrypt.hashSync(req.body.password, 10) // 10 is salting roundes. it means the same password hashing 10 times.
