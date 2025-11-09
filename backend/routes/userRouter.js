@@ -1,5 +1,5 @@
 import express from "express"
-import { blockOrUnblockUser, changePasswordViaOTP, createUser, getAllUsers, getUser, googleLogin, loginUser, sendContactMessage, sendOTP, updatePassword, updateUserData } from "../controllers/userController.js";
+import { blockOrUnblockUser, changePasswordViaOTP, createUser, getAllUsers, getUser, googleLogin, loginUser, sendContactMessage, sendOTP, updateUserProfile } from "../controllers/userController.js";
 
 const userRouter = express.Router();
 
@@ -11,8 +11,7 @@ userRouter.get("/all-users", getAllUsers);
 userRouter.put("/block/:email", blockOrUnblockUser);
 userRouter.get("/send-otp/:email", sendOTP);
 userRouter.post("/change-password/", changePasswordViaOTP);
-userRouter.put("/me", updateUserData);
-userRouter.put("/me/password", updatePassword);
+userRouter.put("/me", updateUserProfile);
 userRouter.post("/contact", sendContactMessage);
 
 export default userRouter;

@@ -12,107 +12,112 @@ export default function AccountSettings() {
   const [image, setImage] = useState(null);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
   const [user, setUser] = useState(null);
 
   const navigate = useNavigate();
 
+  // Load user details on mount
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if(!token){
-        window.location.href = "/login";
-        return;
+    if (!token) {
+      window.location.href = "/login";
+      return;
     }
 
-    axios.get(import.meta.env.VITE_API_URL + "/api/user/me", {
-        headers: { 
-            Authorization: "Bearer " + token, 
+    axios
+      .get(import.meta.env.VITE_API_URL + "/api/user/me", {
+        headers: {
+          Authorization: "Bearer " + token,
         },
-    }).then((res) => {
+      })
+      .then((res) => {
         setFirstName(res.data.firstName);
         setLastName(res.data.lastName);
         setUser(res.data);
-
-    }).catch(() => {
+      })
+      .catch(() => {
         localStorage.removeItem("token");
         window.location.href = "/login";
-    });
+      });
   }, []);
 
-  async function updateUserData(){
-    const data = {
-        firstName : firstName,
-        lastName : lastName,
-        image : user.image,
-    }
-    if (image != null) {
-       const link = await mediaUpload(image);
-       data.image = link;
-    }
-    await axios.put(import.meta.env.VITE_API_URL + "/api/user/me", data, {
-        headers : {
-            Authorization : "Bearer " + localStorage.getItem("token"),
-        },
-    }).then(() => {
-        toast.success("Profile updated successfully");
-        navigate("/");
-    }).catch((error) => {
-        console.error("Error updating profile:", error);
-        toast.error("Failed to update profile")
-    });
-  };
-
-  async function updatePassword(){
-    if(password !== confirmPassword){
-        toast.error("Password do not match");
-        return;
-    }
-
-    await axios.put(import.meta.env.VITE_API_URL + "/api/user/me/password", {
-        password : password,
-    },{
-        headers : {
-            Authorization : "Bearer " + localStorage.getItem("token"),
-        },
-    }).then(() =>{
-        toast.success("Password updated successfully");
-        setPassword("");
-        setConfirmPassword("");
-        navigate("/");
-    }).catch((error) => {
-        console.error("Error updating password:", error);
-        toast.error("Failed to update password");
-    });
-  };
-
-  // Handle image upload preview
+  // Handle profile image change
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setImage(URL.createObjectURL(file));
+      setImage(file);
+      setUser((prev) => ({
+        ...prev,
+        image: URL.createObjectURL(file),
+      }));
     }
   };
 
-  const handleSave = () => {
-    // Here you can call your backend API to update user data
-    if (password !== confirmPassword) {
-      alert("Passwords do not match!");
+  // Save changes (update user info + password)
+  const handleSave = async () => {
+    console.log("Save button clicked");
+  
+    if (password && password !== confirmPassword) {
+      toast.error("Passwords do not match!");
       return;
     }
-    alert("Changes saved successfully!");
+  
+    try {
+      let imageUrl = user?.image;
+      console.log("Current image URL:", imageUrl);
+  
+      // Upload if new image selected
+      if (image && image instanceof File) {
+        console.log("Uploading image...");
+        imageUrl = await mediaUpload(image);
+        console.log("Uploaded image URL:", imageUrl);
+      }
+  
+      const payload = {
+        firstName,
+        lastName,
+        image: imageUrl,
+      };
+      if (password) payload.password = password;
+  
+      console.log("Payload to send:", payload);
+  
+      const response = await axios.put(
+        import.meta.env.VITE_API_URL + "/api/user/me",
+        payload,
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      );
+  
+      console.log("Response from server:", response.data);
+      toast.success("Profile updated successfully!");
+      setPassword("");
+      setConfirmPassword("");
+      navigate("/");
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      toast.error("Failed to update profile");
+    }
   };
+  
 
   return (
-    <div className="w-full h-full flex flex-col justify-center lg:flex-row bg-[url('/bg.jpg')] bg-cover bg-center bg-no-repeat text-gray-100 p-4">
-      {/* --- Left Section: Profile Picture + Basic Info --- */}
-      <div className="w-full lg:w-[40%] backdrop-blur-2xl bg-white/10 rounded-2xl m-4 p-6 flex flex-col items-center justify-center shadow-xl border border-white/20">
-        <h2 className="text-2xl font-bold mb-6 text-yellow-400">Profile Details</h2>
+    <div className="w-full min-h-screen flex flex-col lg:flex-row bg-[url('/bg.jpg')] bg-cover bg-center bg-no-repeat text-gray-100 p-4 lg:p-10">
+      
+      {/* LEFT SECTION — PROFILE INFO */}
+      <div className="w-full lg:w-1/2 backdrop-blur-2xl bg-white/10 rounded-2xl m-4 p-6 flex flex-col items-center justify-center shadow-xl border border-white/20">
+        <h2 className="text-2xl font-bold mb-6 text-yellow-400">
+          Profile Details
+        </h2>
 
         {/* Profile Image */}
         <div className="relative mb-6">
-          {image ? (
+          {user?.image ? (
             <img
-              src={image}
+              src={user.image}
               alt="Profile"
               className="w-32 h-32 object-cover rounded-full border-4 border-yellow-400 shadow-lg"
             />
@@ -130,7 +135,7 @@ export default function AccountSettings() {
           </label>
         </div>
 
-        {/* Basic Info */}
+        {/* Name Fields */}
         <div className="w-full flex flex-col gap-4">
           <div>
             <label className="text-sm font-semibold">First Name</label>
@@ -155,9 +160,11 @@ export default function AccountSettings() {
         </div>
       </div>
 
-      {/* --- Right Section: Password Update --- */}
-      <div className="w-full lg:w-[40%] backdrop-blur-2xl bg-white/10 rounded-2xl m-4 p-6 flex flex-col justify-center shadow-xl border border-white/20">
-        <h2 className="text-2xl font-bold mb-6 text-yellow-400">Security Settings</h2>
+      {/* RIGHT SECTION — PASSWORD SETTINGS */}
+      <div className="w-full lg:w-1/2 backdrop-blur-2xl bg-white/10 rounded-2xl m-4 p-6 flex flex-col justify-center shadow-xl border border-white/20">
+        <h2 className="text-2xl font-bold mb-6 text-yellow-400">
+          Security Settings
+        </h2>
 
         <div className="flex flex-col gap-4">
           <div>

@@ -377,58 +377,33 @@ export async function changePasswordViaOTP(req, res){
    }
 }
 
-//update user data...
-export async function updateUserData(req, res){
-   if(req.user == null){
-    res.status(401).json({
-        message : "Unauthorized",
-    });
-    return;
-   }
+// ✅ Unified update profile controller
+export async function updateUserProfile(req, res) {
+  if (!req.user) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
 
-   try{
+  try {
+    const updates = {};
 
-    await User.updateOne({
-        email : req.user.email
-    },{
-        firstName : req.body.firstName,
-        lastName : req.body.lastName,
-        image : req.body.image,
-    });
+    // Update name
+    if (req.body.firstName) updates.firstName = req.body.firstName;
+    if (req.body.lastName) updates.lastName = req.body.lastName;
 
-    res.status(201).json({
-        message : "User Updated successfully."
-    });
-   } catch(error){
-    res.status(500).json({
-        message : "Failed to update user data.",
-    });
-   }
-}
+    // Update image
+    if (req.body.image) updates.image = req.body.image;
 
-//update password...
-export async function updatePassword(req, res){
-    if(req.user == null){
-        res.status(401).json({
-            message : "Unauthorized",
-        });
-        return;
+    // Update password (only if provided)
+    if (req.body.password) {
+      const hashedPassword = bcrypt.hashSync(req.body.password, 10);
+      updates.password = hashedPassword;
     }
 
-    try{
-       const hashedPassword = bcrypt.hashSync(req.body.password, 10);
-       await User.updateOne({
-        email : req.user.email
-       },{
-        password : hashedPassword
-       })
+    await User.updateOne({ email: req.user.email }, { $set: updates });
 
-       res.json({
-        message : "Password updatetd successfully",
-       });
-    } catch(error){
-       res.status(500).json({
-          message : "Failed to update password."
-       })
-    }
+    res.status(200).json({ message: "Profile updated successfully." });
+  } catch (error) {
+    console.error("Error updating profile:", error);
+    res.status(500).json({ message: "Failed to update profile." });
+  }
 }
