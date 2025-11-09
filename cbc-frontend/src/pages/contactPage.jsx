@@ -1,21 +1,49 @@
 import { motion } from "framer-motion";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+import { useState } from "react";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 export default function ContactPage() {
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const res = await axios.post(import.meta.env.VITE_API_URL + "/api/user/contact", {
+        fullName,
+        email,
+        message,
+      });
+      toast.success(res.data.message);
+      setFullName("");
+      setEmail("");
+      setMessage("");
+    } catch (error) {
+      toast.error("Failed to send message. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-gray-100 px-6 py-16">
-      {/* --- Page Header --- */}
-      <section className="text-center mb-16">
+
+       {/* Header */}
+       <section className="text-center mb-16">
         <h1 className="text-4xl lg:text-5xl font-extrabold text-yellow-400 mb-4">
           Contact <span className="text-white">Casual Club</span>
         </h1>
         <p className="text-gray-300 max-w-2xl mx-auto">
-          Have a question, need help with your order, or just want to say hi?  
-          We’re here to assist you every step of the way.
+          Have a question or need help? We’re here to assist you every step of the way.
         </p>
       </section>
 
-      {/* --- Contact Info Section --- */}
+      {/* Contact Info */}
       <motion.section
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -50,7 +78,7 @@ export default function ContactPage() {
         ))}
       </motion.section>
 
-      {/* --- Contact Form Section --- */}
+      {/* ... existing layout ... */}
       <motion.section
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -61,11 +89,13 @@ export default function ContactPage() {
           Send Us a Message
         </h2>
 
-        <form className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-5">
           <div>
             <label className="block text-sm font-semibold mb-1">Full Name</label>
             <input
               type="text"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
               placeholder="Enter your name"
               className="w-full p-3 rounded-lg bg-white/10 border border-gray-600 focus:outline-none focus:border-yellow-400"
             />
@@ -74,6 +104,8 @@ export default function ContactPage() {
             <label className="block text-sm font-semibold mb-1">Email</label>
             <input
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
               className="w-full p-3 rounded-lg bg-white/10 border border-gray-600 focus:outline-none focus:border-yellow-400"
             />
@@ -81,6 +113,8 @@ export default function ContactPage() {
           <div>
             <label className="block text-sm font-semibold mb-1">Message</label>
             <textarea
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
               placeholder="Write your message..."
               rows="5"
               className="w-full p-3 rounded-lg bg-white/10 border border-gray-600 focus:outline-none focus:border-yellow-400"
@@ -89,17 +123,13 @@ export default function ContactPage() {
 
           <button
             type="submit"
+            disabled={loading}
             className="w-full bg-yellow-400 text-gray-900 font-semibold py-3 rounded-full hover:bg-yellow-300 transition-all duration-300 shadow-md"
           >
-            Send Message
+            {loading ? "Sending..." : "Send Message"}
           </button>
         </form>
       </motion.section>
-
-      {/* --- Footer Message --- */}
-      <div className="text-center mt-16 text-gray-400 text-sm">
-        <p>We’ll get back to you within 24 hours. Thank you for connecting with Casual Club!</p>
-      </div>
     </div>
   );
 }
