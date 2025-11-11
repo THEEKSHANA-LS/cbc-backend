@@ -54,8 +54,23 @@ export default function RegisterPage() {
     <div className="w-full min-h-screen flex flex-col md:flex-row bg-[url('/bg.jpg')] object-cover bg-cover text-primary">
       
       {/* Right Section (Form) - MOVED TO RIGHT ON DESKTOP for consistency with Login */}
+      <div className="hidden md:flex w-1/2 order-2 flex-col justify-center px-16 bg-accent/90 backdrop-blur-sm">
+        <h1 className="text-6xl font-black text-secondary drop-shadow-lg tracking-tight">
+          Casual Club
+        </h1>
+        <p className="mt-8 text-xl text-primary/90 max-w-xl leading-relaxed">
+        Step into a world of effortless style and confidence.
+        Elevate your everyday look with timeless fashion made for modern men.
+        </p>
+        <p className="mt-8 text-lg italic text-primary/60">
+        “Because real style starts with confidence.”
+        </p>
+      </div>
+      
+      {/* Left Section (Branding) - MOVED TO LEFT ON DESKTOP for consistency with Login */}
+      {/* REVISED: Used same deep gradient background and large text sizing */}
       {/* REVISED: Swapped order with branding section for consistency. Added dark background for mobile */}
-      <div className="w-full md:w-1/2 order-2 flex justify-center items-center px-6 py-12 md:py-0 bg-accent/30 md:bg-transparent">
+      <div className="w-full md:w-1/2 order-1 flex justify-center items-center px-6 py-12 md:py-0 bg-accent/30 md:bg-transparent">
         <div className="w-full max-w-sm bg-accent/80 border border-primary/10 backdrop-blur-lg shadow-2xl rounded-2xl p-8 sm:p-10 flex flex-col items-center space-y-6">
           
           {/* Logo */}
@@ -134,20 +149,6 @@ export default function RegisterPage() {
         </div>
       </div>
       
-      {/* Left Section (Branding) - MOVED TO LEFT ON DESKTOP for consistency with Login */}
-      {/* REVISED: Used same deep gradient background and large text sizing */}
-      <div className="hidden md:flex w-1/2 order-1 flex-col justify-center px-16 bg-accent/90 backdrop-blur-sm">
-        <h1 className="text-6xl font-black text-secondary drop-shadow-lg tracking-tight">
-          Casual Club
-        </h1>
-        <p className="mt-8 text-xl text-primary/90 max-w-xl leading-relaxed">
-        Step into a world of effortless style and confidence.
-        Elevate your everyday look with timeless fashion made for modern men.
-        </p>
-        <p className="mt-8 text-lg italic text-primary/60">
-        “Because real style starts with confidence.”
-        </p>
-      </div>
     </div>
   );
 }

@@ -9,7 +9,7 @@ import AboutPage from "./aboutPage.jsx";
 import ContactPage from "./contactPage.jsx";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -57,7 +57,7 @@ export default function HomePage() {
                    spaceBetween={30}
                    centeredSlides={true}
                    autoplay={{
-                   delay: 5000,
+                   delay: 3000,
                    disableOnInteraction: false,
                   }}
                   navigation={false}

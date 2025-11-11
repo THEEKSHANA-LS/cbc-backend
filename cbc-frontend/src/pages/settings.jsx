@@ -105,10 +105,8 @@ export default function AccountSettings() {
   
 
   return (
-    <div className="w-full min-h-screen flex flex-col lg:flex-row bg-[url('/bg.jpg')] bg-cover bg-center bg-no-repeat text-gray-100 p-4 lg:p-10">
-      
-      {/* LEFT SECTION — PROFILE INFO */}
-      <div className="w-full lg:w-1/2 backdrop-blur-2xl bg-white/10 rounded-2xl m-4 p-6 flex flex-col items-center justify-center shadow-xl border border-white/20">
+    <div className="w-full min-h-screen flex flex-col justify-center items-center lg:flex-row bg-[url('/bg.jpg')] bg-cover bg-center bg-no-repeat text-gray-100 p-4 lg:p-10">
+      <div className="w-[500px] backdrop-blur-2xl bg-black/10 rounded-2xl m-4 p-6 flex flex-col items-center justify-center shadow-xl border border-white/20">
         <h2 className="text-2xl font-bold mb-6 text-yellow-400">
           Profile Details
         </h2>
@@ -157,16 +155,6 @@ export default function AccountSettings() {
               className="w-full mt-1 p-3 rounded-lg bg-white/10 border border-gray-500 focus:outline-none focus:border-yellow-400"
             />
           </div>
-        </div>
-      </div>
-
-      {/* RIGHT SECTION — PASSWORD SETTINGS */}
-      <div className="w-full lg:w-1/2 backdrop-blur-2xl bg-white/10 rounded-2xl m-4 p-6 flex flex-col justify-center shadow-xl border border-white/20">
-        <h2 className="text-2xl font-bold mb-6 text-yellow-400">
-          Security Settings
-        </h2>
-
-        <div className="flex flex-col gap-4">
           <div>
             <label className="text-sm font-semibold">New Password</label>
             <input
@@ -187,8 +175,6 @@ export default function AccountSettings() {
               className="w-full mt-1 p-3 rounded-lg bg-white/10 border border-gray-500 focus:outline-none focus:border-yellow-400"
             />
           </div>
-        </div>
-
         <button
           onClick={handleSave}
           className="mt-8 flex items-center justify-center gap-2 bg-yellow-400 text-gray-900 font-semibold py-3 px-6 rounded-full hover:bg-yellow-300 transition-all duration-200 shadow-lg"
@@ -197,6 +183,7 @@ export default function AccountSettings() {
           Save Changes
         </button>
       </div>
+    </div>
     </div>
   );
 }
