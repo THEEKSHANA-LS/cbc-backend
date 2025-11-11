@@ -8,6 +8,13 @@ import CheckoutPage from "./checkoutPage.jsx";
 import AboutPage from "./aboutPage.jsx";
 import ContactPage from "./contactPage.jsx";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+
 export default function HomePage() {
   return (
     <div className="w-full min-h-[100vh] bg-primary text-gray-100 flex flex-col">
@@ -27,7 +34,7 @@ export default function HomePage() {
                   </h1>
                   <p className="text-lg text-gray-200 max-w-md">
                     Explore our exclusive collection of trending products. Enjoy fast delivery,
-                    secure checkout, and the best prices — all in one place.
+                    secure checkout, and the best prices, all in one place.
                   </p>
                   <div className="flex justify-center md:justify-start gap-4">
                     <a
@@ -45,13 +52,45 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                <div className="flex-1 mt-10 md:mt-0 flex justify-center">
-                  <img
-                    src="/home.png"
-                    alt="Featured Products"
-                    className="w-[300px] md:w-[450px] drop-shadow-2xl hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
+                <div className="flex-1 mt-10 md:mt-0 flex justify-center items-center">
+                 <Swiper
+                   spaceBetween={30}
+                   centeredSlides={true}
+                   autoplay={{
+                   delay: 5000,
+                   disableOnInteraction: false,
+                  }}
+                  navigation={false}
+                  modules={[Autoplay, Navigation]}
+                  className="w-[300px] md:w-[450px] rounded-2xl shadow-lg border border-transparent"
+                  style={{
+                    borderRadius: "10% 60% 10% 50% / 50% 10% 60% 10%",
+                  }}
+                >
+                <SwiperSlide>
+                 <img
+                  src="/home.jpg"
+                  alt="Trending Product 1"
+                  className="w-full h-auto rounded-2xl "
+                 />
+                </SwiperSlide>
+                <SwiperSlide>
+                 <img
+                  src="/home2.jpg"
+                  alt="Trending Product 2"
+                  className="w-full h-auto rounded-2xl"
+                 />
+                </SwiperSlide>
+                <SwiperSlide>
+                 <img
+                  src="/home3.jpg"
+                  alt="Trending Product 3"
+                  className="w-full h-auto rounded-2xl"
+                 />
+                </SwiperSlide>
+              </Swiper>
+            </div>
+
               </section>
             }
           />
