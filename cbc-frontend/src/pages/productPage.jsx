@@ -44,7 +44,7 @@ export default function ProductPage(){
                     }
                   }
                   placeholder="Search products..."
-                  className="w-[50%] h-[40px] rounded-md px-4 focus:outline-none border-2 bg-accent"
+                  className="w-[50%] h-[40px] rounded-md px-4 focus:outline-none text-black border-2 bg-primary/80"
                 />
             </div>
             {

@@ -36,7 +36,7 @@ export default function ProductOverview(){
           {
             status == "success" && (
                 <div className="w-full flex flex-col lg:flex-row p-10">
-                     <h1 className="text-2xl font-bold text-center sm:text-black lg:hidden">{product.name}</h1>
+                     <h1 className="text-2xl font-bold text-center lg:hidden">{product.name}</h1>
                     {/* Image Slider part in left side */}
                     <div className="w-full lg:w-[50%] h-full flex justify-center items-center">
                         <ImageSlider images={product.images}/>
@@ -56,15 +56,15 @@ export default function ProductOverview(){
                                 )
                             }
                         </h1>
-                        <p className="mt-[30px] text-justify sm:text-black">{product.description}</p>
+                        <p className="mt-[30px] text-justify">{product.description}</p>
                         <p>Category : {product.category}</p>
                         {
                            product.labelledPrice > product.price ? 
                            <div className="flex gap-3 items-center">
                             <p className="text-lg text-secondary font-semibold line-through">LKR {product.labelledPrice.toFixed(2)}</p>
-                            <p className="text-lg text-white sm:text-black font-semibold">LKR {product.price.toFixed(2)}</p>
+                            <p className="text-lg text-white font-semibold">LKR {product.price.toFixed(2)}</p>
                            </div> : 
-                           <p className="text-lg text-white sm:text-black font-semibold">LKR {product.price.toFixed(2)}</p>
+                           <p className="text-lg text-white font-semibold">LKR {product.price.toFixed(2)}</p>
                         }
                         
                         {/*Add to cart and BuyNow buttons*/}
@@ -81,7 +81,7 @@ export default function ProductOverview(){
                               price : product.price,
                               labelledPrice : product.labelledPrice,
                               quantity : 1
-                           }]}className="w-[50%] h-full border border-accent text-white font-semibold hover:bg-accent hover:text-white flex justify-center sm:text-black items-center">Buy Now</Link>
+                           }]}className="w-[50%] h-full border border-accent text-white font-semibold hover:bg-accent hover:text-white flex justify-center items-center">Buy Now</Link>
                         </div>
                     </div>
                 </div>
