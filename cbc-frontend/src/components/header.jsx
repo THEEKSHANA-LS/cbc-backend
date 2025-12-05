@@ -38,7 +38,7 @@ export default function Header(){
                             <a href="/about" className="p-4 border-b border-secondary/10">About</a>
                             <a href="/contact" className="p-4 border-b border-secondary/10">Contact</a>
                             <a href="/cart" className="p-4 border-b border-secondary/10">Cart</a>
-                            <div className="lg:hidden flex w-[300px] absolute bottom-[20px] ml-5 justify-start items-center gap-4">
+                            <div className="lg:hidden flex w-[300px] absolute bottom-[80px] ml-5 justify-start items-center gap-4">
                                <UserData/>  
                             </div>
             
